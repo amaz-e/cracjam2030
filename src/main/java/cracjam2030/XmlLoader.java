@@ -13,15 +13,19 @@ import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 
 public class XmlLoader {
 
-    List<TaskRecord> records = new ArrayList<>();
+    List<TaskRecord> records;
+
 
     public void loadXml(String path) throws IOException {
+
+        records = new ArrayList<>();
 
         FileInputStream fis = new FileInputStream(new File(path));
         HSSFWorkbook wb = new HSSFWorkbook(fis);
@@ -36,7 +40,26 @@ public class XmlLoader {
                     continue;
                 }
 
+
+                if((row.getCell(1) == null) || (row.getCell(1).getCellType() == CellType.BLANK)) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    Main.logger.addError(message);
+                     continue;
+                } else if((row.getCell(0) == null) || (row.getCell(0).getCellType() == CellType.BLANK)) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    Main.logger.addError(message);
+                    continue;
+                } else if ((row.getCell(2) == null) || (row.getCell(2).getCellType() == CellType.BLANK)) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    Main.logger.addError(message);
+                    continue;
+                }
+
+
+
                 Iterator<Cell> cellIterator = row.cellIterator();
+
+                int stopIndex = 3;
 
                 TaskRecord record = new TaskRecord();
 
@@ -48,30 +71,30 @@ public class XmlLoader {
 
                 record.setProjectName(sheet.getSheetName());
 
-                while (cellIterator.hasNext()) {
+
+                for (int index = 0; index< stopIndex; index++) {
                     Cell cell = cellIterator.next();
-                    //Check the cell type and format accordingly
+
                     switch (cell.getCellType()) {
                         case NUMERIC:
                             if(DateUtil.isCellDateFormatted(cell)) {
                                 Date date = cell.getDateCellValue();
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                 record.setProjectDate(date);
-                                System.out.print(dateFormat.format(date));
                             } else {
                                 record.setWorkHours(cell.getNumericCellValue());
-                                System.out.print(cell.getNumericCellValue());
                             }
                             break;
                         case STRING:
                             record.setTaskName(cell.getStringCellValue());
-                            System.out.print(cell.getStringCellValue());
                             break;
                         default:
                             System.out.println("?");
                     }
                 }
-                records.add(record);
+
+                    records.add(record);
+
             }
         }
         fis.close();

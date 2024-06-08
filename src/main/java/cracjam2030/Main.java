@@ -8,8 +8,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-//        Main.logger.addError("Pzykład dodania błędu");
-//        Main.logger.addLine("Przykład dodania linii raportu");
 //
 //
 //        // Press Alt+Enter with your caret at the highlighted text to see how
@@ -29,14 +27,6 @@ public class Main {
 
         Raport1.Generate(MockDataset.GetMockTaskRecordList());
 
-        System.out.println("Błędy:");
-        for (String e: logger.getReportErrors()             ) {
-            System.out.println(e);
-        }
-        System.out.println("Raport:");
-        for (String l: logger.getReportLines()             ) {
-            System.out.println(l);
-        }
 
         loader.loadXml("/var/home/student/Documents/reporter-dane/reporter-dane/2012/01/Kowalski_Jan.xls");
 
@@ -52,6 +42,17 @@ public class Main {
             System.out.println();
             System.out.println();
         }
+
+        System.out.println("Błędy:");
+        for (String e: logger.getReportErrors()             ) {
+            System.out.println(e);
+        }
+        System.out.println("Raport:");
+        for (String l: logger.getReportLines()             ) {
+            System.out.println(l);
+        }
+
+
 
 
 
