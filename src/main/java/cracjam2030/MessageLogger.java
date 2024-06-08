@@ -28,6 +28,9 @@ public class MessageLogger {
     public List<String> getReportLines() {
         return reportLines;
     }
+    public boolean haveErrors() {
+        return !reportErrors.isEmpty();
+    }
 
     public void setReportLines(List<String> reportLines) {
         this.reportLines = reportLines;
