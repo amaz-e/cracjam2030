@@ -9,34 +9,29 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        XmlLoader loader = new XmlLoader();
+        Run("/var/home/student/Downloads/reporter-dane/reporter-dane/2012/01");
 
+    }
+
+    private static void Run(String path) throws IOException {
+        XLSLoader loader = new XLSLoader();
         ExcelFileFinder fileFinder = new ExcelFileFinder();
+        List<String> spreadsheetpathList = fileFinder.findExcelFiles(path);
 
-        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/");
         List<TaskRecord> recordData = new ArrayList<>();
-        for (String s: stringList) {
+        for (String s: spreadsheetpathList) {
             System.out.println(s);
-            loader.loadXml(s);
+            loader.loadXLS(s);
             recordData.addAll(loader.getRecords());
             System.out.println();
-
         }
+
         System.out.println(recordData.size());
         for (TaskRecord t: recordData) {
             System.out.println(t);
         }
 
-        Report2.createReport(recordData);
-
-        System.out.println("Błędy:");
-        for (String e: logger.getReportErrors()) {
-            System.out.println(e);
-        }
-        System.out.println("Raport:");
-        for (String l: logger.getReportLines()) {
-            System.out.println(l);
-        }
-
+        Report1.createReport(recordData);
+        ReportPrinter.printReport(logger);
     }
 }
