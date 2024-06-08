@@ -12,6 +12,7 @@ public class MessageLogger {
 
     private TreeMap<String, Double> raport1Data;
     private TreeMap<String, Double> raport2Data;
+    private TreeMap<String, Double> raport3Data;
 
 
     public void addLine(String message) {
@@ -28,6 +29,10 @@ public class MessageLogger {
 
     public void addDeveloperProjectWorkinghours(String project, double workingHours) {
         raport2Data.put(project, workingHours);
+    }
+
+    public void addTaskWorkingHours(String task, double workingHours) {
+        raport3Data.put(task, workingHours);
     }
 
     public MessageLogger() {
@@ -66,6 +71,10 @@ public class MessageLogger {
         return raport2Data;
     }
 
+    public TreeMap<String, Double> getRaport3Data() {
+        return raport3Data;
+    }
+
     public void setRaport1Data(TreeMap<String, Double> raport1Data) {
         this.raport1Data = raport1Data;
     }
@@ -73,5 +82,7 @@ public class MessageLogger {
         this.raport2Data = raport2Data;
 
     }
-
+    public void setRaport3Data(TreeMap<String, Double> raport3Data) {
+        this.raport3Data = raport3Data;
+    }
 }
