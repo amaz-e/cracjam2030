@@ -13,7 +13,7 @@ public class Main {
 
         ExcelFileFinder fileFinder = new ExcelFileFinder();
 
-        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/");
+        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/04");
         List<TaskRecord> recordData = new ArrayList<>();
         for (String s: stringList) {
             System.out.println(s);
