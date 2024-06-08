@@ -1,6 +1,5 @@
 package cracjam2030;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,12 +16,12 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 
-public class XmlLoader {
+public class XLSLoader {
 
     List<TaskRecord> records = new ArrayList<>();
 
-    public void loadXml(String path) throws IOException {
-
+    public void loadXLS(String path) throws IOException {
+        records = new ArrayList<>();
         FileInputStream fis = new FileInputStream(new File(path));
         HSSFWorkbook wb = new HSSFWorkbook(fis);
 
@@ -41,11 +40,8 @@ public class XmlLoader {
                 TaskRecord record = new TaskRecord();
 
                 record.setDevelopername(getDeveloperNameFromFile(path));
-
                 record.setFolderMonth(getFolderMonthFromFile(path));
-
                 record.setGetFolderYear(getFolderYearFromFile(path));
-
                 record.setProjectName(sheet.getSheetName());
 
                 while (cellIterator.hasNext()) {
