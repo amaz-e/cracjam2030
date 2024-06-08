@@ -14,5 +14,15 @@ public class Main {
         //System.out.printf("Hello and welcome!");
 
         Raport1.Generate(MockDataset.GetMockTaskRecordList());
+
+        System.out.println("Błędy:");
+        for (String e: logger.getReportErrors()             ) {
+            System.out.println(e);
+        }
+        System.out.println("Raport:");
+        for (String l: logger.getReportLines()             ) {
+            System.out.println(l);
+        }
+
     }
 }
