@@ -2,10 +2,13 @@ package cracjam2030;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class MessageLogger {
     private List<String> reportLines;
     private  List<String> reportErrors;
+
+    private TreeMap<String, Double> raport2Data;
 
     public void addLine(String message){
         reportLines.add(message);
@@ -33,5 +36,9 @@ public class MessageLogger {
 
     public void setReportErrors(List<String> reportErrors) {
         this.reportErrors = reportErrors;
+    }
+
+    public void setRaport2Data(TreeMap<String, Double> raport2Data) {
+        this.raport2Data = raport2Data;
     }
 }
