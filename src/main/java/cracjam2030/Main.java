@@ -30,8 +30,12 @@ public class Main {
         for (TaskRecord t: recordData) {
             System.out.println(t);
         }
-
+        logger.addLine("\nRaport 1:");
         Report1.createReport(recordData);
+        logger.addLine("\nRaport 2:");
+        Report2.createReport(recordData);
+        logger.addLine("\nRaport 3:");
+        Report3.createReport(recordData);
         ReportPrinter.printReport(logger);
     }
 }
