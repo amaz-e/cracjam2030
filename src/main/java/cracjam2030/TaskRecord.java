@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class TaskRecord {
     private String taskName; //done
-   private String developername;
-   private String projectName;
+   private String developername; //done
+   private String projectName; //done
    private Date projectDate; //done
    private double workHours; //done
-   private int folderMonth;
-   private int getFolderYear;
+   private int folderMonth; //
+   private int getFolderYear; //
 
     public String getDevelopername() {
         return developername;
