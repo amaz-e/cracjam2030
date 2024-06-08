@@ -1,4 +1,4 @@
-package org.example;
+package cracjam2030;
 
 public class Main {
     public static MessageLogger logger = new MessageLogger();
