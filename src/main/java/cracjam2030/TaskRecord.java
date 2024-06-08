@@ -26,7 +26,8 @@ public class TaskRecord {
 
     @Override
     public String toString() {
-        return MessageFormat.format("Projekt {0} zadanie {1} godziny {2}", projectName, taskName, workHours);
+        return MessageFormat.format("Projekt {0} zadanie {1} developer {2} godziny {3} data {4} folderYM {5} / {6}",
+                projectName, taskName, developername, workHours, projectDate, getFolderYear, folderMonth);
     }
 
     public String getDevelopername() {
