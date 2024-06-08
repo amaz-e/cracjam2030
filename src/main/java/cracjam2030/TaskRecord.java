@@ -11,6 +11,18 @@ public class TaskRecord {
    private int folderMonth;
    private int getFolderYear;
 
+    public TaskRecord() {
+    }
+    public TaskRecord(String taskName, String developername, String projectName, Date projectDate, double workHours, int folderMonth, int getFolderYear) {
+        this.taskName = taskName;
+        this.developername = developername;
+        this.projectName = projectName;
+        this.projectDate = projectDate;
+        this.workHours = workHours;
+        this.folderMonth = folderMonth;
+        this.getFolderYear = getFolderYear;
+    }
+
     public String getDevelopername() {
         return developername;
     }
