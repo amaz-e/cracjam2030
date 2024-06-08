@@ -14,6 +14,7 @@ public class Main {
         ExcelFileFinder fileFinder = new ExcelFileFinder();
 
         List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/reporter-dane/reporter-dane/2012/01");
+
         List<TaskRecord> recordData = new ArrayList<>();
         for (String s: stringList) {
             System.out.println(s);
