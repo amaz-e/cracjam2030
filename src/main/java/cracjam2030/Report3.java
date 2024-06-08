@@ -23,7 +23,8 @@ public class Report3 {
 
             for (var t : sortedKeys) {
                 Main.logger.addLine(t + " " + ActivityHoursDictionary.get(t).getSum());
-                Main.logger.addTaskWorkingHours(t.toString(),ActivityHoursDictionary.get(t).getSum());
+                //TODO
+//                Main.logger.addTaskWorkingHours(t.toString(),ActivityHoursDictionary.get(t).getSum());
             }
         } catch (Exception e) {
             Main.logger.addError(e.getMessage());
