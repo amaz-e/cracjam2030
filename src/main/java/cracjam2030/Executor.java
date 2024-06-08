@@ -11,6 +11,8 @@ public class Executor {
 
     public static void main(String[] args) {
 
+        ExcelFileFinder fileFinder = new ExcelFileFinder();
+
         if (args.length > 0) {
             System.out.printf("Function called with params");
             if (Arrays.stream(args).anyMatch(s -> s.contains("-h"))){
@@ -18,7 +20,22 @@ public class Executor {
             }
             if (Arrays.stream(args).anyMatch(s -> s.contains("-R1"))){
                 String path = args[1];
-                System.out.printf("Running Report1 with path: " + path);
+                System.out.printf("\nRunning Report1 with path: " + path);
+                fileFinder.findExcelFiles(path);
+
+                Raport1.Generate(MockDataset.GetMockTaskRecordList());
+
+                if (Main.logger.haveErrors()) {
+                    System.out.println("\nBłędy:");
+                    for (String e : Main.logger.getReportErrors()) {
+                        System.out.println(e);
+                    }
+                }
+
+                System.out.println("Raport:");
+                for (String l: Main.logger.getReportLines()             ) {
+                    System.out.println(l);
+                }
             }
             if (Arrays.stream(args).anyMatch(s -> s.contains("-R2"))){
                 String path = args[1];
