@@ -1,0 +1,22 @@
+package cracjam2030;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Raport1 {
+    public static void Generate(List<TaskRecord> records) {
+        var projectHoursDictionary = records.stream().collect(Collectors.groupingBy(x -> x.getProjectName(), Collectors.summarizingDouble(x -> x.getWorkHours())));
+
+        List sortedKeys = new ArrayList(projectHoursDictionary.keySet());
+        Collections.sort(sortedKeys);
+
+        for (var t : sortedKeys) {
+            Main.logger.addLine(t + " " + projectHoursDictionary.get(t).getSum());
+            //System.out.println();
+            //System.out.println(t + " " + projectHoursDictionary.get(t).getSum());
+        }
+
+    }
+}
