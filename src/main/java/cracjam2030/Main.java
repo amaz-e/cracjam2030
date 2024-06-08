@@ -9,15 +9,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        XmlLoader loader = new XmlLoader();
+        XLSLoader loader = new XLSLoader();
 
         ExcelFileFinder fileFinder = new ExcelFileFinder();
 
-        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/");
+        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/reporter-dane/reporter-dane/2012/01");
         List<TaskRecord> recordData = new ArrayList<>();
         for (String s: stringList) {
             System.out.println(s);
-            loader.loadXml(s);
+            loader.loadXLS(s);
             recordData.addAll(loader.getRecords());
             System.out.println();
 
@@ -27,7 +27,7 @@ public class Main {
             System.out.println(t);
         }
 
-        Report2.createReport(recordData);
+        Report1.createReport(recordData);
 
         System.out.println("Błędy:");
         for (String e: logger.getReportErrors()) {
