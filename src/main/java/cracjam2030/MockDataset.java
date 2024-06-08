@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MockDataset {
 
-    public List<TaskRecord> GetMockTaskRecordList() {
+    public static List<TaskRecord> GetMockTaskRecordList() {
         List<TaskRecord> taskRecords = new ArrayList<>();
 
         Date date = new Date();
@@ -20,6 +20,8 @@ public class MockDataset {
                     6,
                     2020
             );
+            //System.out.println();
+            //System.out.println( taskRecord );
             taskRecords.add(taskRecord);
         }
         return taskRecords;
