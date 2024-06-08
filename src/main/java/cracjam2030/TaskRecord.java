@@ -1,5 +1,6 @@
 package cracjam2030;
 
+import java.text.MessageFormat;
 import java.util.Date;
 
 public class TaskRecord {
@@ -10,6 +11,24 @@ public class TaskRecord {
    private double workHours;
    private int folderMonth;
    private int getFolderYear;
+
+    public TaskRecord() {
+    }
+    public TaskRecord(String taskName, String developername, String projectName, Date projectDate, double workHours, int folderMonth, int getFolderYear) {
+        this.taskName = taskName;
+        this.developername = developername;
+        this.projectName = projectName;
+        this.projectDate = projectDate;
+        this.workHours = workHours;
+        this.folderMonth = folderMonth;
+        this.getFolderYear = getFolderYear;
+    }
+
+    @Override
+    public String toString() {
+        return MessageFormat.format("Projekt {0} zadanie {1} developer {2} godziny {3} data {4} folderYM {5} / {6}",
+                projectName, taskName, developername, workHours, projectDate, getFolderYear, folderMonth);
+    }
 
     public String getDevelopername() {
         return developername;
