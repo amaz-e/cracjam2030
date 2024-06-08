@@ -19,10 +19,10 @@ public class Report2 {
                     .collect(Collectors.groupingBy(x->x.getProjectName(), Collectors.summarizingDouble (x->x.getWorkHours())));
             List sortedProjectKeys = new ArrayList(projectNameDictionary.keySet());
             Collections.sort(sortedProjectKeys);
+            Main.logger.addLine(t + " " + projectDeveloperDictionary.get(t).getSum());
             for(var i : sortedProjectKeys){
-                // TODO: formatowanie wyswietlania danych
-                Main.logger.addLine(t+ ";" + i + " " + projectNameDictionary.get(i).getSum());
-                Main.logger.addDeveloperProjectWorkinghours(t+ ";" + i,projectNameDictionary.get(i).getSum());
+                Main.logger.addLine("    " + i + " " + projectNameDictionary.get(i).getSum());
+                Main.logger.addDeveloperProjectWorkinghours(t + ";" + i,projectNameDictionary.get(i).getSum());
             }
         }
 
