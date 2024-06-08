@@ -15,6 +15,7 @@ public class Raport1 {
 
             for (var t : sortedKeys) {
                 Main.logger.addLine(t + " " + projectHoursDictionary.get(t).getSum());
+                Main.logger.addProjectWorkinghours(t.toString(), projectHoursDictionary.get(t).getSum());
             }
         } catch (Exception e) {
             Main.logger.addError(e.getMessage());
