@@ -4,13 +4,13 @@ import java.text.MessageFormat;
 import java.util.Date;
 
 public class TaskRecord {
-    private String taskName;
-   private String developername;
-   private String projectName;
-   private Date projectDate;
-   private double workHours;
-   private int folderMonth;
-   private int getFolderYear;
+    private String taskName; //done
+   private String developername; //done
+   private String projectName; //done
+   private Date projectDate; //done
+   private double workHours; //done
+   private int folderMonth; //
+   private int getFolderYear; //
 
     public TaskRecord() {
     }
