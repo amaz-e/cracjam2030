@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Raport1 {
-    public static void Generate(List<TaskRecord> records) {
+public class Report1 {
+    public static void createReport(List<TaskRecord> records) {
         try {
             var projectHoursDictionary = records.stream().collect(Collectors.groupingBy(x -> x.getProjectName(), Collectors.summarizingDouble(x -> x.getWorkHours())));
 

@@ -23,7 +23,7 @@ public class Executor {
                 System.out.printf("\nRunning Report1 with path: " + path);
                 fileFinder.findExcelFiles(path);
 
-                Raport1.Generate(MockDataset.GetMockTaskRecordList());
+                Report1.createReport(MockDataset.GetMockTaskRecordList());
 
                 if (Main.logger.haveErrors()) {
                     System.out.println("\nBłędy:");

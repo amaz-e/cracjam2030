@@ -27,7 +27,7 @@ public class Main {
             System.out.println(t);
         }
 
-        Raport1.Generate(recordData);
+        Report2.createReport(recordData);
 
         System.out.println("Błędy:");
         for (String e: logger.getReportErrors()) {
