@@ -1,8 +1,5 @@
 package cracjam2030;
 
-
-
-
         import java.io.File;
         import java.util.ArrayList;
         import java.util.List;
@@ -27,7 +24,6 @@ package cracjam2030;
                 }
             }
         }
-
     }
 
 
