@@ -1,8 +1,10 @@
 package cracjam2030;
 
+import java.io.IOException;
+
 public class Main {
     public static MessageLogger logger = new MessageLogger();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Main.logger.addError("Pzykład dodania błędu");
         Main.logger.addLine("Przykład dodania linii raportu");
@@ -19,5 +21,8 @@ public class Main {
             // for you, but you can always add more by pressing Ctrl+F8.
             System.out.println("i = " + i);
         }
+
+        XmlLoader.loadXml("Kowalski_Jan.xls");
+
     }
 }

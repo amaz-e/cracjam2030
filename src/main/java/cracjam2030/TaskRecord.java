@@ -3,11 +3,11 @@ package cracjam2030;
 import java.util.Date;
 
 public class TaskRecord {
-    private String taskName;
+    private String taskName; //done
    private String developername;
    private String projectName;
-   private Date projectDate;
-   private double workHours;
+   private Date projectDate; //done
+   private double workHours; //done
    private int folderMonth;
    private int getFolderYear;
 
