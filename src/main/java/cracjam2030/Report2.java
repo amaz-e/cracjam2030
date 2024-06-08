@@ -4,9 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Report2 {
-    public void createReport(){
-        List<TaskRecord> records = new MockDataset().GetMockTaskRecordList();
-        TreeMap<String, Double> response =  new TreeMap<>();
+    public static void createReport(List<TaskRecord> records){
 
         var projectDeveloperDictionary = records.stream()
                 .collect(Collectors.groupingBy(x -> x.getDevelopername(), Collectors.summarizingDouble(x -> x.getWorkHours())));
@@ -22,8 +20,9 @@ public class Report2 {
             List sortedProjectKeys = new ArrayList(projectNameDictionary.keySet());
             Collections.sort(sortedProjectKeys);
             for(var i : sortedProjectKeys){
-                response.put(t+ ";" + i,projectNameDictionary.get(i).getSum());
-                Main.logger.setRaport2Data(response);
+                // TODO: formatowanie wyswietlania danych
+                Main.logger.addLine(t+ ";" + i + " " + projectNameDictionary.get(i).getSum());
+                Main.logger.addDeveloperProjectWorkinghours(t+ ";" + i,projectNameDictionary.get(i).getSum());
             }
         }
 
