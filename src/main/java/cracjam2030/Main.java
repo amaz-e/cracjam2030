@@ -9,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Run("/var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01");
+        Run("/var/home/student/Documents/reporter-dane/reporter-dane/2012/02");
+
+        XLSImporter.importToXLS();
 
     }
 
@@ -37,4 +39,7 @@ public class Main {
         Report3.createReport(recordData);
         ReportPrinter.printReport(logger);
     }
+
+
+
 }
