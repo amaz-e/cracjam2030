@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Runner.executeProgram(args);
-//        Runner.Run("/var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01");
+//     example command: -r1 /var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01
 
     }
 
