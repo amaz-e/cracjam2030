@@ -9,56 +9,18 @@ import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.demo.charts.ExampleChart;
 import org.knowm.xchart.style.Styler.LegendPosition;
 
-public class Chart implements ExampleChart<CategoryChart> {
+public class Chart {
 
-    private List<String> keys;
-    private List<Double> values;
+    public static void generateChart( String chartType) {
 
-
-    public Chart(List<String>  keys, List<Double> values) {
-        this.keys = keys;
-        this.values = values;
+        switch (chartType) {
+            case "1": Chart1.generateChart(Main.logger);
+            break;
+            case "2": Chart2.generateChart(Main.logger);
+                break;
+            case "3": Chart3.generateChart(Main.logger);
+                break;
+        }
     }
 
-
-
-    public static void generateChart(MessageLogger logger) {
-
-        List<String> keys = new ArrayList<String>(logger.getRaport1Data().keySet());;
-        List<Double> values = new ArrayList<Double>(logger.getRaport1Data().values());
-
-        ExampleChart<CategoryChart> exampleChart = new Chart(keys, values);
-        CategoryChart chart = exampleChart.getChart();
-        new SwingWrapper<>(chart).displayChart();
-    }
-
-
-    @Override
-    public CategoryChart getChart() {
-
-        // Create Chart
-        CategoryChart chart =
-                new CategoryChartBuilder()
-                        .width(800)
-                        .height(600)
-                        .title(getClass().getSimpleName())
-                        .xAxisTitle("Project")
-                        .yAxisTitle("Hours")
-                        .build();
-
-        // Customize Chart
-        chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
-        chart.getStyler().setPlotGridLinesVisible(false);
-
-        // Series
-        chart.addSeries("Dane", keys, values);
-
-        return chart;
-    }
-
-    @Override
-    public String getExampleChartName() {
-
-        return getClass().getSimpleName() + " - Basic Bar Chart";
-    }
 }
