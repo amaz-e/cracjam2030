@@ -44,6 +44,10 @@ public class MessageLogger {
         raport1Data = new TreeMap<>();
         raport2Data = new TreeMap<>();
         raport3Data = new LinkedHashMap<>();
+        dateFromFilter = new Date(Long.MIN_VALUE);
+        dateToFilter = new Date(Long.MAX_VALUE);
+        dateLowestFound = new Date(Long.MAX_VALUE);
+        dateHighestFound =new Date(Long.MIN_VALUE);
     }
 
     public List<String> getReportLines() {
