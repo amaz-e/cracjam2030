@@ -128,4 +128,4 @@ public class MessageLogger {
     public void setDateToFilter(Date dateToFilter) {
         this.dateToFilter = dateToFilter;
     }
-}
+
