@@ -1,6 +1,7 @@
 package cracjam2030;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -12,7 +13,7 @@ public class MessageLogger {
 
     private TreeMap<String, Double> raport1Data;
     private TreeMap<String, Double> raport2Data;
-    private TreeMap<String, Double> raport3Data;
+    private LinkedHashMap<String, Double> raport3Data;
 
 
     public void addLine(String message) {
@@ -32,6 +33,7 @@ public class MessageLogger {
     }
 
     public void addTaskWorkingHours(String task, double workingHours) {
+
         raport3Data.put(task, workingHours);
     }
 
@@ -40,7 +42,7 @@ public class MessageLogger {
         reportErrors = new ArrayList<>();
         raport1Data = new TreeMap<>();
         raport2Data = new TreeMap<>();
-        raport3Data = new TreeMap<>();
+        raport3Data = new LinkedHashMap<>();
     }
 
     public List<String> getReportLines() {
@@ -72,7 +74,7 @@ public class MessageLogger {
         return raport2Data;
     }
 
-    public TreeMap<String, Double> getRaport3Data() {
+    public LinkedHashMap<String, Double> getRaport3Data() {
         return raport3Data;
     }
 
@@ -85,7 +87,7 @@ public class MessageLogger {
         this.raport2Data = raport2Data;
     }
 
-    public void setRaport3Data(TreeMap<String, Double> raport3Data) {
+    public void setRaport3Data(LinkedHashMap<String, Double> raport3Data) {
 
         this.raport3Data = raport3Data;
     }
