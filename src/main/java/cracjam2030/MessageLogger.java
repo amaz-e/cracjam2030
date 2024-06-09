@@ -12,8 +12,8 @@ public class MessageLogger {
     private TreeMap<String, Double> raport2Data;
     private LinkedHashMap<String, Double> raport3Data;
 
-    private Date lowestDate;
-    private Date highestDate;
+    private Date dateLowestFound;
+    private Date dateHighestFound;
     private Date dateFromFilter;
     private Date dateToFilter;
 
@@ -93,20 +93,20 @@ public class MessageLogger {
         this.raport3Data = raport3Data;
     }
 
-    public Date getLowestDate() {
-        return lowestDate;
+    public Date getDateLowestFound() {
+        return dateLowestFound;
     }
 
-    public void setLowestDate(Date lowestDate) {
-        this.lowestDate = lowestDate;
+    public void setDateLowestFound(Date dateLowestFound) {
+        this.dateLowestFound = dateLowestFound;
     }
 
-    public Date getHighestDate() {
-        return highestDate;
+    public Date getDateHighestFound() {
+        return dateHighestFound;
     }
 
-    public void setHighestDate(Date highestDate) {
-        this.highestDate = highestDate;
+    public void setDateHighestFound(Date dateHighestFound) {
+        this.dateHighestFound = dateHighestFound;
     }
 
     public Date getDateFromFilter() {
