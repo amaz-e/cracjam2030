@@ -12,7 +12,7 @@ public class Main {
         Runner.executeProgram(args);
 //     example command: -r1 /var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01
 
-        XLSImporter.importToXLS();
+        XLSImporter.importToXLS("3");
 
     }
 
