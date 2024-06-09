@@ -51,6 +51,7 @@ public class Runner {
         CommandLine cmdLine = null;
 
 
+
         //sprawdza czy jest argumement help
         try {
             CommandLine prelimCmd = cliParser.parse(options, args, true);
@@ -91,7 +92,7 @@ public class Runner {
         String validPath = "";
         for (String pathString : cmdLine.getArgs()) {
             if (isAbsoluteDirectoryPath(pathString)) {
-                System.out.println("Ścieżka jest absolutną ścieżką do katalogu. Przeszukuje katalog: " + pathString);
+                //System.out.println("Ścieżka jest absolutną ścieżką do katalogu. Przeszukuje katalog: " + pathString);
                 validPathProvided = true;
                 validPath = pathString;
                 break;
@@ -108,7 +109,7 @@ public class Runner {
 
             switch (cmdLine.getOptionValue("r")) {
                 case "1":
-                    executeReport( validPath, "1");
+                    executeReport(validPath, "1");
                     break;
                 case "2":
                     executeReport(validPath, "2");
@@ -120,8 +121,9 @@ public class Runner {
                     System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
                     break;
             }
-
         }
+
+
 
         //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
         if (cmdLine.hasOption("d")) {
