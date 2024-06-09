@@ -24,9 +24,9 @@ public class XLSImporter {
 
         try {
             Path newDir = Files.createDirectory(path);
-            System.out.println("Katalog został utworzony pomyślnie: " + newDir);
+            //System.out.println("Katalog został utworzony pomyślnie: " + newDir);
         } catch (IOException e) {
-            System.err.println("Nie udało się utworzyć katalogu, bądź katalog już istnieje: " + e.getMessage());
+            //System.err.println("Nie udało się utworzyć katalogu, bądź katalog już istnieje: " + e.getMessage());
         }
 
         Workbook workbook = new HSSFWorkbook();
@@ -58,7 +58,7 @@ public class XLSImporter {
         int i = 1;
         if (reportType.equals("2")) {
             for (var record : reportData.keySet()) {
-                System.out.println("*** " + i + "  ");
+                //System.out.println("*** " + i + "  ");
                 Row row1 = sheet.createRow(i);
                 String ProjectName = record.split(";")[1];
                 String DeveloperName = record.split(";")[0];
@@ -74,7 +74,7 @@ public class XLSImporter {
             }
         } else if (reportType.equals("3")) {
             for (var record : sortedReportData.keySet()) {
-                System.out.println("*** " + i + "  ");
+                //System.out.println("*** " + i + "  ");
                 Row row1 = sheet.createRow(i);
                 String ProjectName = record;
                 row1.createCell(0).setCellValue(ProjectName);
@@ -88,7 +88,7 @@ public class XLSImporter {
             }
         } else {
             for (var record : reportData.keySet()) {
-                System.out.println("*** " + i + "  ");
+                //System.out.println("*** " + i + "  ");
                 Row row1 = sheet.createRow(i);
                 String ProjectName = record;
                 row1.createCell(0).setCellValue(ProjectName);
