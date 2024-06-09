@@ -1,8 +1,10 @@
 package cracjam2030;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.SwingWrapper;
@@ -52,6 +54,11 @@ public class Chart3 implements ExampleChart<CategoryChart> {
 
         // Series
         chart.addSeries("Dane", keys, values);
+        try {
+            BitmapEncoder.saveBitmap(chart, "./output/Chart", BitmapEncoder.BitmapFormat.JPG);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
         return chart;

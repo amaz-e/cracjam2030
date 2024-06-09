@@ -1,6 +1,7 @@
 package cracjam2030;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -18,6 +19,13 @@ import java.util.TreeMap;
 public class XLSImporter {
     public static void importToXLS(String reportType) {
 
+        int index = switch (reportType) {
+            case "1" -> 2;
+            case "2" -> 3;
+            case "3" -> 1;
+            default -> 4;
+        };
+
         String directoryPath = "output";
 
         Path path = Paths.get(directoryPath);
@@ -31,18 +39,28 @@ public class XLSImporter {
 
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("Raport");
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 1));
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, index));
         CellStyle style = workbook.createCellStyle();
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
+        Font font = workbook.createFont();
+        font.setBold(true);
+        font.setUnderline(Font.U_SINGLE);
+        font.setColor(HSSFColor.HSSFColorPredefined.ROYAL_BLUE.getIndex());
+        font.setFontHeight((short) 300);
+        style.setFont(font);
+
+        CellStyle style2 = workbook.createCellStyle();
+        Font font2 = workbook.createFont();
+        font2.setFontHeight((short) 250);
+        style2.setFont(font2);
 
 
-        // Utwórz nagłówki kolumn
         Row headerRow = sheet.createRow(0);
+        headerRow.setHeight((short) 500);
         headerRow.createCell(0).setCellValue("Raport " + reportType);
         headerRow.getCell(0).setCellStyle(style);
 
-        // Dodaj przykładowe dane
 
         TreeMap<String, Double> reportData = new TreeMap<>();
         LinkedHashMap<String, Double> sortedReportData = new LinkedHashMap<>();
@@ -58,18 +76,24 @@ public class XLSImporter {
         int i = 1;
         if (reportType.equals("2")) {
             for (var record : reportData.keySet()) {
-                //System.out.println("*** " + i + "  ");
+
                 Row row1 = sheet.createRow(i);
+                row1.setHeight((short) 330);
                 String ProjectName = record.split(";")[1];
                 String DeveloperName = record.split(";")[0];
                 row1.createCell(0).setCellValue(DeveloperName);
+                row1.getCell(0).setCellStyle(style2);
                 row1.createCell(1).setCellValue(ProjectName);
+                row1.getCell(1).setCellStyle(style2);
                 Double ProjectHours = reportData.get(record);
                 if (ProjectHours == null) {
                     Main.logger.addError(record + " null hours!");
                     ProjectHours = -1.0;
                 }
                 row1.createCell(2).setCellValue(ProjectHours);
+                row1.getCell(2).setCellStyle(style2);
+                row1.createCell(3).setCellValue("hours");
+                row1.getCell(3).setCellStyle(style2);
                 i++;
             }
         } else if (reportType.equals("3")) {
@@ -78,39 +102,40 @@ public class XLSImporter {
                 Row row1 = sheet.createRow(i);
                 String ProjectName = record;
                 row1.createCell(0).setCellValue(ProjectName);
+                row1.setHeight((short) 330);
+                row1.getCell(0).setCellStyle(style2);
                 Double ProjectHours = sortedReportData.get(record);
                 if (ProjectHours == null) {
                     Main.logger.addError(record + " null hours!");
                     ProjectHours = -1.0;
                 }
                 row1.createCell(1).setCellValue(ProjectHours);
+                row1.getCell(1).setCellStyle(style2);
                 i++;
             }
         } else {
             for (var record : reportData.keySet()) {
                 //System.out.println("*** " + i + "  ");
                 Row row1 = sheet.createRow(i);
+                row1.setHeight((short) 330);
                 String ProjectName = record;
                 row1.createCell(0).setCellValue(ProjectName);
+                row1.getCell(0).setCellStyle(style2);
                 Double ProjectHours = reportData.get(record);
                 if (ProjectHours == null) {
                     Main.logger.addError(record + " null hours!");
                     ProjectHours = -1.0;
                 }
                 row1.createCell(1).setCellValue(ProjectHours);
+                row1.getCell(1).setCellStyle(style2);
+                row1.createCell(2).setCellValue("hours");
+                row1.getCell(2).setCellStyle(style2);
                 i++;
             }
         }
-//        row1.createCell(0).setCellValue("Project 1");
-//        row1.createCell(1).setCellValue("John Doe");
-//        row1.createCell(2).setCellValue("hours");
 
-//        Row row2 = sheet.createRow(2);
-//        row2.createCell(0).setCellValue("Project 2");
-//        row2.createCell(1).setCellValue("coś tam");
-//        row2.createCell(2).setCellValue("hours");
-
-        // Zapisz plik
+        sheet.autoSizeColumn(0);
+        sheet.autoSizeColumn(1);
 
         try (FileOutputStream fileOut = new FileOutputStream("output/report" + reportType + "_genOn" + new Date().toString() + ".xls")) {
             workbook.write(fileOut);
@@ -118,7 +143,6 @@ public class XLSImporter {
             e.printStackTrace();
         }
 
-        // Zamknij workbook
         try {
             workbook.close();
         } catch (IOException e) {

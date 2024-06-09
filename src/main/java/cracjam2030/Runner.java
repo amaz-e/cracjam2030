@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -166,8 +170,6 @@ public class Runner {
             }
         }
 
-
-
         //Sprawdza czy ścieżka zawiera argument zapisu do pliku i wywołuje funkcję do zapisania raportu do pliku
         if (cmdLine.hasOption("s")) {
             String savePath = cmdLine.getOptionValue(save);
@@ -186,9 +188,7 @@ public class Runner {
             Chart.generateChart(cmdLine.getOptionValue("r"));
         }
 
-
     }
-
 
 
     public static boolean isAbsoluteDirectoryPath(String pathString) {
@@ -211,26 +211,29 @@ public class Runner {
                 recordData.addAll(loader.getRecords());
             }
 
-
+        recordData = RecordFilter.filterAndFindDatesRange(recordData);
 
         switch (reportType) {
             case "1":
                 Main.logger.addLine("\nRaport 1:");
                 Report1.createReport(recordData);
-                ReportPrinter.printReport(Main.logger);
                 break;
             case "2":
                 Main.logger.addLine("\nRaport 2:");
                 Report2.createReport(recordData);
-                ReportPrinter.printReport(Main.logger);
                 break;
             case "3":
                 Main.logger.addLine("\nRaport 3:");
                 Report3.createReport(recordData);
-                ReportPrinter.printReport(Main.logger);
                 break;
-
         }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDateFrom = formatter.format(Main.logger.getDateLowestFound());
+        String formattedDateTo = formatter.format(Main.logger.getDateHighestFound());
+
+        Main.logger.addLine("\nRaport dotyczy dat z zakresu: " + formattedDateFrom + " do " + formattedDateTo);
+        ReportPrinter.printReport(Main.logger);
     }
 }
 
