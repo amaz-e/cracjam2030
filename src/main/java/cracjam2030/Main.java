@@ -13,9 +13,6 @@ public class Main {
 
         Runner.executeProgram(args);
 
-        generateChart1(logger);
-        generateChart2(logger);
-        generateChart3(logger);
 
     }
 

@@ -1,4 +1,5 @@
 package cracjam2030;
+
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Runner {
 
@@ -108,14 +110,17 @@ public class Runner {
                 case "1":
                     executeReport( validPath, 1);
                     XLSImporter.importToXLS("1");
+                    Chart.generateChart1(Main.logger);
                     break;
                 case "2":
                     executeReport( validPath, 2);
                     XLSImporter.importToXLS("2");
+                    Chart.generateChart2(Main.logger);
                     break;
                 case "3":
                     executeReport( validPath, 3);
                     XLSImporter.importToXLS("3");
+                    Chart.generateChart3(Main.logger);
                     break;
                 default:
                     System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
