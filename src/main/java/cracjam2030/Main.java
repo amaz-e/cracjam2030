@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
     public static MessageLogger logger = new MessageLogger();
     public static void main(String[] args) throws IOException {
 

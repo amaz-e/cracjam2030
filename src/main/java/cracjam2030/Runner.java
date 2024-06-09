@@ -64,7 +64,7 @@ public class Runner {
             cmdLine = cliParser.parse(options, args);
 
         } catch (ParseException e) {
-            System.err.println("Błąd: " + e.getMessage());
+            Main.logger.addError("Błąd: " + e.getMessage());
             formatter.printHelp("pomoc:", options);
             System.exit(1);
         }
@@ -78,7 +78,7 @@ public class Runner {
                 throw new IllegalArgumentException("Podaj, który raport wygenerować np r=1 lub r=2 lub r=3. Program nie obsługuje raportu: " + reportValue);
             }
         } catch (IllegalArgumentException e) {
-            System.err.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
+            Main.logger.addError("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
             formatter.printHelp("pomoc:", options);
             System.exit(1);
             return;
@@ -97,7 +97,7 @@ public class Runner {
         }
 
         if (!validPathProvided) {
-            System.err.println("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
+            Main.logger.addError("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
             System.exit(1);
         }
 
@@ -115,7 +115,7 @@ public class Runner {
                     executeReport( validPath, 3);
                     break;
                 default:
-                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
+                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
                     break;
             }
 

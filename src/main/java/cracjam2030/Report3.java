@@ -24,7 +24,6 @@ public class Report3 {
     }
 
     private static void addToLogger(Entry<String, Double> entry) {
-        System.out.println(" " + entry.getKey() + " " + entry.getValue());
         Main.logger.addLine(entry.getKey() + " " + entry.getValue());
         Main.logger.addTaskWorkingHours(entry.getKey(), entry.getValue());
     }
