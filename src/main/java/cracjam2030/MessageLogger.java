@@ -40,6 +40,7 @@ public class MessageLogger {
         reportErrors = new ArrayList<>();
         raport1Data = new TreeMap<>();
         raport2Data = new TreeMap<>();
+        raport3Data = new TreeMap<>();
     }
 
     public List<String> getReportLines() {
@@ -76,13 +77,16 @@ public class MessageLogger {
     }
 
     public void setRaport1Data(TreeMap<String, Double> raport1Data) {
+
         this.raport1Data = raport1Data;
     }
+
     public void setRaport2Data(TreeMap<String, Double> raport2Data) {
         this.raport2Data = raport2Data;
-
     }
+
     public void setRaport3Data(TreeMap<String, Double> raport3Data) {
+
         this.raport3Data = raport3Data;
     }
 }
