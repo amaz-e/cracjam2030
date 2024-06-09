@@ -1,9 +1,6 @@
 package cracjam2030;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class MessageLogger {
@@ -15,6 +12,10 @@ public class MessageLogger {
     private TreeMap<String, Double> raport2Data;
     private LinkedHashMap<String, Double> raport3Data;
 
+    private Date dateLowestFound;
+    private Date dateHighestFound;
+    private Date dateFromFilter;
+    private Date dateToFilter;
 
     public void addLine(String message) {
         reportLines.add(message);
@@ -43,6 +44,10 @@ public class MessageLogger {
         raport1Data = new TreeMap<>();
         raport2Data = new TreeMap<>();
         raport3Data = new LinkedHashMap<>();
+        dateFromFilter = new Date(Long.MIN_VALUE);
+        dateToFilter = new Date(Long.MAX_VALUE);
+        dateLowestFound = new Date(Long.MAX_VALUE);
+        dateHighestFound =new Date(Long.MIN_VALUE);
     }
 
     public List<String> getReportLines() {
@@ -90,5 +95,37 @@ public class MessageLogger {
     public void setRaport3Data(LinkedHashMap<String, Double> raport3Data) {
 
         this.raport3Data = raport3Data;
+    }
+
+    public Date getDateLowestFound() {
+        return dateLowestFound;
+    }
+
+    public void setDateLowestFound(Date dateLowestFound) {
+        this.dateLowestFound = dateLowestFound;
+    }
+
+    public Date getDateHighestFound() {
+        return dateHighestFound;
+    }
+
+    public void setDateHighestFound(Date dateHighestFound) {
+        this.dateHighestFound = dateHighestFound;
+    }
+
+    public Date getDateFromFilter() {
+        return dateFromFilter;
+    }
+
+    public void setDateFromFilter(Date dateFromFilter) {
+        this.dateFromFilter = dateFromFilter;
+    }
+
+    public Date getDateToFilter() {
+        return dateToFilter;
+    }
+
+    public void setDateToFilter(Date dateToFilter) {
+        this.dateToFilter = dateToFilter;
     }
 }
