@@ -146,13 +146,17 @@ public class Runner {
     public static void executeReport(String path, int reportType) throws IOException {
         XLSLoader loader = new XLSLoader();
         ExcelFileFinder fileFinder = new ExcelFileFinder();
-        List<String> spreadsheetpathList = fileFinder.findExcelFiles(path);
+        List<String> spreadsheetpathList = new ArrayList<>();
+        try {
+            spreadsheetpathList = fileFinder.findExcelFiles(path);
+        }  catch (ExcelFilesNotFoundException e) {}
 
-        List<TaskRecord> recordData = new ArrayList<>();
-        for (String s: spreadsheetpathList) {
-            loader.loadXLS(s);
-            recordData.addAll(loader.getRecords());
-        }
+            List<TaskRecord> recordData = new ArrayList<>();
+
+            for (String s : spreadsheetpathList) {
+                loader.loadXLS(s);
+                recordData.addAll(loader.getRecords());
+            }
 
 //        System.out.println(recordData.size());
 //        for (TaskRecord t: recordData) {
