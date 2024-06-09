@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 
@@ -31,9 +32,9 @@ public class XLSImporter {
 
         try {
             Path newDir = Files.createDirectory(path);
-            System.out.println("Katalog został utworzony pomyślnie: " + newDir);
+            //System.out.println("Katalog został utworzony pomyślnie: " + newDir);
         } catch (IOException e) {
-            System.err.println("Nie udało się utworzyć katalogu, bądź katalog już istnieje: " + e.getMessage());
+            //System.err.println("Nie udało się utworzyć katalogu, bądź katalog już istnieje: " + e.getMessage());
         }
 
         Workbook workbook = new HSSFWorkbook();
@@ -62,18 +63,20 @@ public class XLSImporter {
 
 
         TreeMap<String, Double> reportData = new TreeMap<>();
+        LinkedHashMap<String, Double> sortedReportData = new LinkedHashMap<>();
         if (reportType.equals("1")) {
             reportData = Main.logger.getRaport1Data();
         } else if (reportType.equals("2")) {
             reportData = Main.logger.getRaport2Data();
 
         } else if (reportType.equals("3")) {
-            reportData = Main.logger.getRaport3Data();
+            sortedReportData = Main.logger.getRaport3Data();
         }
 
         int i = 1;
         if (reportType.equals("2")) {
             for (var record : reportData.keySet()) {
+
                 Row row1 = sheet.createRow(i);
                 row1.setHeight((short) 330);
                 String ProjectName = record.split(";")[1];
@@ -93,9 +96,23 @@ public class XLSImporter {
                 row1.getCell(3).setCellStyle(style2);
                 i++;
             }
+        } else if (reportType.equals("3")) {
+            for (var record : sortedReportData.keySet()) {
+                //System.out.println("*** " + i + "  ");
+                Row row1 = sheet.createRow(i);
+                String ProjectName = record;
+                row1.createCell(0).setCellValue(ProjectName);
+                Double ProjectHours = sortedReportData.get(record);
+                if (ProjectHours == null) {
+                    Main.logger.addError(record + " null hours!");
+                    ProjectHours = -1.0;
+                }
+                row1.createCell(1).setCellValue(ProjectHours);
+                i++;
+            }
         } else {
             for (var record : reportData.keySet()) {
-                System.out.println("*** " + i + "  ");
+                //System.out.println("*** " + i + "  ");
                 Row row1 = sheet.createRow(i);
                 row1.setHeight((short) 330);
                 String ProjectName = record;
