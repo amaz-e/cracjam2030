@@ -24,7 +24,7 @@ public class Chart2 implements ExampleChart<CategoryChart> {
         List<String> keys = new ArrayList<String>(logger.getRaport2Data().keySet());;
         List<Double> values = new ArrayList<Double>(logger.getRaport2Data().values());
 
-        ExampleChart<CategoryChart> exampleChart = new Chart1(keys, values);
+        ExampleChart<CategoryChart> exampleChart = new Chart2(keys, values);
         CategoryChart chart = exampleChart.getChart();
         new SwingWrapper<>(chart).displayChart();
     }
