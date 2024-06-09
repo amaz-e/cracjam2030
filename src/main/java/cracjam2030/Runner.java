@@ -52,14 +52,14 @@ public class Runner {
                 .required(false)
                 .hasArg(true)
                 .longOpt("from")
-                .desc("Data początkowa przeszukiwania")
+                .desc("Data początkowa przeszukiwania YYYY-MM-DD")
                 .build();
 
         Option to = Option.builder("t")
                 .required(false)
                 .hasArg(true)
                 .longOpt("to")
-                .desc("Data końcowa przeszukiwania")
+                .desc("Data końcowa przeszukiwania YYYY-MM-DD")
                 .build();
 
         options.addOption(report);
