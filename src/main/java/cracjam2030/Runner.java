@@ -41,10 +41,27 @@ public class Runner {
                 .desc("Wyświetla pomoc")
                 .build();
 
+        Option from = Option.builder("f")
+                .required(false)
+                .hasArg(true)
+                .longOpt("from")
+                .desc("Data początkowa przeszukiwania")
+                .build();
+
+        Option to = Option.builder("t")
+                .required(false)
+                .hasArg(true)
+                .longOpt("to")
+                .desc("Data końcowa przeszukiwania")
+                .build();
+
         options.addOption(report);
         options.addOption(diagram);
         options.addOption(save);
         options.addOption(help);
+        options.addOption(from);
+        options.addOption(to);
+
 
         CommandLineParser cliParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
