@@ -75,7 +75,6 @@ public class Runner {
         CommandLine cmdLine = null;
 
 
-
         //sprawdza czy jest argumement help
         try {
             CommandLine prelimCmd = cliParser.parse(options, args, true);
@@ -132,11 +131,12 @@ public class Runner {
 
         try {
             if (cmdLine.hasOption("f")) {
-            String strDate = cmdLine.getOptionValue("f");
-            LocalDate localDate = LocalDate.parse(strDate);
-            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Main.logger.setDateFromFilter(date);
-        }}catch (Exception e) {
+                String strDate = cmdLine.getOptionValue("f");
+                LocalDate localDate = LocalDate.parse(strDate);
+                Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Main.logger.setDateFromFilter(date);
+            }
+        } catch (Exception e) {
             Main.logger.addError("Błąd daty");
         }
 
@@ -147,12 +147,13 @@ public class Runner {
                 LocalDate localDate = LocalDate.parse(strDate);//"2018-05-05"
                 Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 Main.logger.setDateToFilter(date);
-            }}catch (Exception e) {Main.logger.addError("Błąd daty");}
+            }
+        } catch (Exception e) {
+            Main.logger.addError("Błąd daty");
+        }
 
 
-
-
-        if (cmdLine.hasOption("r")){
+        if (cmdLine.hasOption("r")) {
 
             switch (cmdLine.getOptionValue("r")) {
                 case "1":
@@ -176,11 +177,9 @@ public class Runner {
             Path path = Paths.get(savePath);
             Path catalogPaths = path.getParent();
             if (isAbsoluteDirectoryPath(String.valueOf(catalogPaths))) {
-                System.out.println("Plik zapisano w:"+ savePath);
+                System.out.println("Plik zapisano w:" + savePath);
                 XLSImporter.importToXLS(cmdLine.getOptionValue("r"));
-            }
-
-            else System.out.println("Niepoprawna ścieżka zapisu");
+            } else System.out.println("Niepoprawna ścieżka zapisu");
         }
 
         //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
@@ -202,14 +201,15 @@ public class Runner {
         List<String> spreadsheetpathList = new ArrayList<>();
         try {
             spreadsheetpathList = fileFinder.findExcelFiles(path);
-        }  catch (ExcelFilesNotFoundException e) {}
+        } catch (ExcelFilesNotFoundException e) {
+        }
 
-            List<TaskRecord> recordData = new ArrayList<>();
+        List<TaskRecord> recordData = new ArrayList<>();
 
-            for (String s : spreadsheetpathList) {
-                loader.loadXLS(s);
-                recordData.addAll(loader.getRecords());
-            }
+        for (String s : spreadsheetpathList) {
+            loader.loadXLS(s);
+            recordData.addAll(loader.getRecords());
+        }
 
         recordData = RecordFilter.filterAndFindDatesRange(recordData);
 
@@ -232,7 +232,9 @@ public class Runner {
         String formattedDateFrom = formatter.format(Main.logger.getDateLowestFound());
         String formattedDateTo = formatter.format(Main.logger.getDateHighestFound());
 
-        Main.logger.addLine("\nRaport dotyczy dat z zakresu: " + formattedDateFrom + " do " + formattedDateTo);
+        if (!recordData.isEmpty()) {
+            Main.logger.addLine("\nRaport dotyczy dat z zakresu: " + formattedDateFrom + " do " + formattedDateTo);
+        }
         ReportPrinter.printReport(Main.logger);
     }
 }
