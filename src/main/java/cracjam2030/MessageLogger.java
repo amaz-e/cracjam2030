@@ -47,7 +47,7 @@ public class MessageLogger {
         dateFromFilter = new Date(Long.MIN_VALUE);
         dateToFilter = new Date(Long.MAX_VALUE);
         dateLowestFound = new Date(Long.MAX_VALUE);
-        dateHighestFound =new Date(Long.MIN_VALUE);
+        dateHighestFound = new Date(Long.MIN_VALUE);
     }
 
     public List<String> getReportLines() {
@@ -129,3 +129,4 @@ public class MessageLogger {
         this.dateToFilter = dateToFilter;
     }
 
+}
