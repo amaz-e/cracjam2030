@@ -23,6 +23,7 @@ public class Chart implements ExampleChart<CategoryChart> {
 
 
     public static void generateChart(MessageLogger logger) {
+
         List<String> keys = new ArrayList<String>(logger.getRaport1Data().keySet());;
         List<Double> values = new ArrayList<Double>(logger.getRaport1Data().values());
 
@@ -30,8 +31,6 @@ public class Chart implements ExampleChart<CategoryChart> {
         CategoryChart chart = exampleChart.getChart();
         new SwingWrapper<>(chart).displayChart();
     }
-
-
 
 
     @Override
@@ -53,7 +52,6 @@ public class Chart implements ExampleChart<CategoryChart> {
 
         // Series
         chart.addSeries("Dane", keys, values);
-
 
         return chart;
     }
