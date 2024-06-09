@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cracjam2030.Chart.*;
+
 public class Main {
     public static MessageLogger logger = new MessageLogger();
 
     public static void main(String[] args) throws IOException {
 
-        Run("/var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01");
+        Run("/var/home/student/Downloads/cracjam2030/src/main/resources/testy/Poprawne_dane");
 
     }
 
@@ -36,5 +38,13 @@ public class Main {
         logger.addLine("\nRaport 3:");
         Report3.createReport(recordData);
         ReportPrinter.printReport(logger);
+
+        generateChart1(logger);
+        generateChart2(logger);
+        generateChart3(logger);
+
+
+
+
     }
 }
