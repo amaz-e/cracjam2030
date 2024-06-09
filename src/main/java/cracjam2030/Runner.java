@@ -107,12 +107,15 @@ public class Runner {
             switch (cmdLine.getOptionValue("r")) {
                 case "1":
                     executeReport( validPath, 1);
+                    XLSImporter.importToXLS("1");
                     break;
                 case "2":
                     executeReport( validPath, 2);
+                    XLSImporter.importToXLS("2");
                     break;
                 case "3":
                     executeReport( validPath, 3);
+                    XLSImporter.importToXLS("3");
                     break;
                 default:
                     System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
