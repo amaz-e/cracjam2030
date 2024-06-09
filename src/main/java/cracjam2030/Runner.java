@@ -96,7 +96,13 @@ public class Runner {
         }
 
 
-        //tu kod
+        if ((cmdLine.hasOption("r"))&&(cmdLine.getOptionValue("r"))=="1") {
+
+
+
+
+
+        }
 
 
 
