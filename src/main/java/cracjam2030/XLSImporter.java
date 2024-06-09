@@ -22,7 +22,7 @@ public class XLSImporter {
         int index = switch (reportType) {
             case "1" -> 2;
             case "2" -> 3;
-            case "3" -> 2;
+            case "3" -> 1;
             default -> 4;
         };
 
@@ -102,12 +102,15 @@ public class XLSImporter {
                 Row row1 = sheet.createRow(i);
                 String ProjectName = record;
                 row1.createCell(0).setCellValue(ProjectName);
+                row1.setHeight((short) 330);
+                row1.getCell(0).setCellStyle(style2);
                 Double ProjectHours = sortedReportData.get(record);
                 if (ProjectHours == null) {
                     Main.logger.addError(record + " null hours!");
                     ProjectHours = -1.0;
                 }
                 row1.createCell(1).setCellValue(ProjectHours);
+                row1.getCell(1).setCellStyle(style2);
                 i++;
             }
         } else {
