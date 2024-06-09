@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -122,6 +125,27 @@ public class Runner {
             System.out.println("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
             System.exit(1);
         }
+
+        try {
+            if (cmdLine.hasOption("f")) {
+            String strDate = cmdLine.getOptionValue("f");
+            LocalDate localDate = LocalDate.parse(strDate);
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Main.logger.setDateFromFilter(date);
+        }}catch (Exception e) {
+            Main.logger.addError("Błąd daty");
+        }
+
+
+        try {
+            if (cmdLine.hasOption("t")) {
+                String strDate = cmdLine.getOptionValue("t");
+                LocalDate localDate = LocalDate.parse(strDate);//"2018-05-05"
+                Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Main.logger.setDateToFilter(date);
+            }}catch (Exception e) {Main.logger.addError("Błąd daty");}
+
+
 
 
         if (cmdLine.hasOption("r")){
