@@ -9,35 +9,32 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        Run("/var/home/student/IdeaProjects/cracjam2030/src/main/resources/testy/Poprawne_dane/2012/01");
+
+    }
+
+    private static void Run(String path) throws IOException {
         XLSLoader loader = new XLSLoader();
-
         ExcelFileFinder fileFinder = new ExcelFileFinder();
-
-        List<String> stringList = fileFinder.findExcelFiles("/var/home/student/Downloads/reporter-dane/reporter-dane/2012/01");
+        List<String> spreadsheetpathList = fileFinder.findExcelFiles(path);
 
         List<TaskRecord> recordData = new ArrayList<>();
-        for (String s: stringList) {
-            System.out.println(s);
+        for (String s: spreadsheetpathList) {
             loader.loadXLS(s);
             recordData.addAll(loader.getRecords());
-            System.out.println();
-
         }
+
         System.out.println(recordData.size());
         for (TaskRecord t: recordData) {
-            System.out.println(t);
+            //wyświetlanie wszystkich rekordów
+            //System.out.println(t);
         }
-
+        logger.addLine("\nRaport 1:");
         Report1.createReport(recordData);
-
-        System.out.println("Błędy:");
-        for (String e: logger.getReportErrors()) {
-            System.out.println(e);
-        }
-        System.out.println("Raport:");
-        for (String l: logger.getReportLines()) {
-            System.out.println(l);
-        }
-
+        logger.addLine("\nRaport 2:");
+        Report2.createReport(recordData);
+        logger.addLine("\nRaport 3:");
+        Report3.createReport(recordData);
+        ReportPrinter.printReport(logger);
     }
 }
