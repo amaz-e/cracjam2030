@@ -18,12 +18,12 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 
-public class XmlLoader {
+public class XLSLoader {
 
     List<TaskRecord> records;
 
 
-    public void loadXml(String path) throws IOException {
+    public void loadXLS(String path) throws IOException {
 
         records = new ArrayList<>();
 

@@ -24,11 +24,11 @@ public class Main {
             recordData.addAll(loader.getRecords());
         }
 
-        System.out.println(recordData.size());
-        for (TaskRecord t: recordData) {
-            //wyświetlanie wszystkich rekordów
-            //System.out.println(t);
-        }
+//        System.out.println(recordData.size());
+//        for (TaskRecord t: recordData) {
+//            //wyświetlanie wszystkich rekordów
+//            System.out.println(t);
+//        }
         logger.addLine("\nRaport 1:");
         Report1.createReport(recordData);
         logger.addLine("\nRaport 2:");
