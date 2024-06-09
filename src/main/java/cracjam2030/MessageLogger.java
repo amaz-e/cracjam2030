@@ -1,9 +1,6 @@
 package cracjam2030;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class MessageLogger {
@@ -15,6 +12,10 @@ public class MessageLogger {
     private TreeMap<String, Double> raport2Data;
     private LinkedHashMap<String, Double> raport3Data;
 
+    private Date lowestDate;
+    private Date highestDate;
+    private Date dateFromFilter;
+    private Date dateToFilter;
 
     public void addLine(String message) {
         reportLines.add(message);
@@ -90,5 +91,37 @@ public class MessageLogger {
     public void setRaport3Data(LinkedHashMap<String, Double> raport3Data) {
 
         this.raport3Data = raport3Data;
+    }
+
+    public Date getLowestDate() {
+        return lowestDate;
+    }
+
+    public void setLowestDate(Date lowestDate) {
+        this.lowestDate = lowestDate;
+    }
+
+    public Date getHighestDate() {
+        return highestDate;
+    }
+
+    public void setHighestDate(Date highestDate) {
+        this.highestDate = highestDate;
+    }
+
+    public Date getDateFromFilter() {
+        return dateFromFilter;
+    }
+
+    public void setDateFromFilter(Date dateFromFilter) {
+        this.dateFromFilter = dateFromFilter;
+    }
+
+    public Date getDateToFilter() {
+        return dateToFilter;
+    }
+
+    public void setDateToFilter(Date dateToFilter) {
+        this.dateToFilter = dateToFilter;
     }
 }
