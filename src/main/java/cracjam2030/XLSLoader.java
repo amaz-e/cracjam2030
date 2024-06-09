@@ -44,15 +44,15 @@ public class XLSLoader {
                 if((row.getCell(0) == null || (row.getCell(0).getCellType() == CellType.BLANK)) && (row.getCell(1) == null || (row.getCell(1).getCellType() == CellType.BLANK)) && (row.getCell(2) == null || (row.getCell(2).getCellType() == CellType.BLANK))) {
                     continue;
                 } else if((row.getCell(1) == null) || (row.getCell(1).getCellType() == CellType.BLANK) || (row.getCell(1).getCellType() != CellType.STRING)) {
-                    String message = "Wystąpił błąd podczas dodania danych. Rząd: " + (row.getRowNum()+1) + " Komórka: "+ (row.getCell(1).getColumnIndex()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    String message = "Wystąpił błąd podczas dodania danych. Rząd: " + (row.getRowNum()+1) + " Komórka: "+ 2 + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
                     Main.logger.addError(message);
                      continue;
                 } else if((row.getCell(0) == null) || (row.getCell(0).getCellType() == CellType.BLANK) || (row.getCell(0).getCellType() != CellType.NUMERIC) || !DateUtil.isCellDateFormatted(row.getCell(0))) {
-                    String message = "Wystąpił błąd podczas dodania danych. Rząd: " + (row.getRowNum()+1) + " Komórka: " + (row.getCell(0).getColumnIndex()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    String message = "Wystąpił błąd podczas dodania danych. Rząd: " + (row.getRowNum()+1) + " Komórka: " + 1 + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
                     Main.logger.addError(message);
                     continue;
                 } else if ((row.getCell(2) == null) || (row.getCell(2).getCellType() == CellType.BLANK) || (row.getCell(2).getCellType() != CellType.NUMERIC)) {
-                    String message = "Wystąpił błąd podczas dodania danch. Rząd: " + (row.getRowNum()+1) + " Komórka: " + (row.getCell(2).getColumnIndex()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                    String message = "Wystąpił błąd podczas dodania danch. Rząd: " + (row.getRowNum()+1) + " Komórka: " + 3 + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
                     Main.logger.addError(message);
                     continue;
                 }
