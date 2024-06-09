@@ -108,19 +108,13 @@ public class Runner {
 
             switch (cmdLine.getOptionValue("r")) {
                 case "1":
-                    executeReport( validPath, 1);
-                    XLSImporter.importToXLS("1");
-                    Chart.generateChart1(Main.logger);
+                    executeReport( validPath, "1");
                     break;
                 case "2":
-                    executeReport( validPath, 2);
-                    XLSImporter.importToXLS("2");
-                    Chart.generateChart2(Main.logger);
+                    executeReport(validPath, "2");
                     break;
                 case "3":
-                    executeReport( validPath, 3);
-                    XLSImporter.importToXLS("3");
-                    Chart.generateChart3(Main.logger);
+                    executeReport(validPath, "3");
                     break;
                 default:
                     System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
@@ -132,6 +126,7 @@ public class Runner {
         //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
         if (cmdLine.hasOption("d")) {
             System.out.println("Rysujemy diagram");
+            Chart.generateChart(cmdLine.getOptionValue("r"));
         }
 
         //Sprawdza czy ścieżka zawiera argument zapisu do pliku i wywołuje funkcję do zapisania raportu do pliku
@@ -140,18 +135,22 @@ public class Runner {
             Path path = Paths.get(savePath);
             Path catalogPaths = path.getParent();
             if (isAbsoluteDirectoryPath(String.valueOf(catalogPaths))) {
-                System.out.println("zapisujemy plik");}
+                System.out.println("zapisujemy plik");
+                XLSImporter.importToXLS(cmdLine.getOptionValue("r"));
+            }
 
             else System.out.println("Niepoprawna ścieżka zapisu");
         }
     }
+
+
 
     public static boolean isAbsoluteDirectoryPath(String pathString) {
         Path path = Paths.get(pathString);
         return path.isAbsolute() && Files.exists(path) && Files.isDirectory(path);
     }
 
-    public static void executeReport(String path, int reportType) throws IOException {
+    public static void executeReport(String path, String reportType) throws IOException {
         XLSLoader loader = new XLSLoader();
         ExcelFileFinder fileFinder = new ExcelFileFinder();
         List<String> spreadsheetpathList = new ArrayList<>();
@@ -166,24 +165,20 @@ public class Runner {
                 recordData.addAll(loader.getRecords());
             }
 
-//        System.out.println(recordData.size());
-//        for (TaskRecord t: recordData) {
-//            //wyświetlanie wszystkich rekordów
-//            System.out.println(t);
-//        }
+
 
         switch (reportType) {
-            case 1:
+            case "1":
                 Main.logger.addLine("\nRaport 1:");
                 Report1.createReport(recordData);
                 ReportPrinter.printReport(Main.logger);
                 break;
-            case 2:
+            case "2":
                 Main.logger.addLine("\nRaport 2:");
                 Report2.createReport(recordData);
                 ReportPrinter.printReport(Main.logger);
                 break;
-            case 3:
+            case "3":
                 Main.logger.addLine("\nRaport 3:");
                 Report3.createReport(recordData);
                 ReportPrinter.printReport(Main.logger);

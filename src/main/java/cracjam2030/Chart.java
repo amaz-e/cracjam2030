@@ -25,8 +25,19 @@ public class Chart implements ExampleChart<CategoryChart> {
         this.values = values;
     }
 
-
-
+    public static void generateChart (String chartType) {
+        switch (chartType) {
+            case "1":
+                generateChart1(logger);
+                break;
+            case "2":
+                generateChart2(logger);
+            break;
+            case "3":
+                generateChart3(logger);
+                break;
+        }
+    }
     public static void generateChart1(MessageLogger logger) {
         List<String> keys = new ArrayList<String>(logger.getRaport1Data().keySet());;
         List<Double> values = new ArrayList<Double>(logger.getRaport1Data().values());
@@ -55,8 +66,6 @@ public class Chart implements ExampleChart<CategoryChart> {
     }
 
 
-
-
     @Override
     public CategoryChart getChart() {
 
@@ -76,7 +85,6 @@ public class Chart implements ExampleChart<CategoryChart> {
 
         // Series
         chart.addSeries("Dane", keys, values);
-
 
         return chart;
     }
