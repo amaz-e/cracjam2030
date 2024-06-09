@@ -73,7 +73,7 @@ public class Runner {
         try {
             CommandLine prelimCmd = cliParser.parse(options, args, true);
             if (prelimCmd.hasOption("h")) {
-                formatter.printHelp("pomoc:", options);
+                formatter.printHelp(" ", options);
                 System.exit(0);
             }
         } catch (ParseException e) {
@@ -85,7 +85,7 @@ public class Runner {
 
         } catch (ParseException e) {
             Main.logger.addError("Błąd: " + e.getMessage());
-            formatter.printHelp("pomoc:", options);
+            formatter.printHelp(" ", options);
             System.exit(1);
         }
 
@@ -99,7 +99,8 @@ public class Runner {
             }
         } catch (IllegalArgumentException e) {
             Main.logger.addError("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
-            formatter.printHelp("pomoc:", options);
+            System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
+            formatter.printHelp(" ", options);
             System.exit(1);
             return;
         }
@@ -118,6 +119,7 @@ public class Runner {
 
         if (!validPathProvided) {
             Main.logger.addError("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
+            System.out.println("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
             System.exit(1);
         }
 
@@ -135,7 +137,7 @@ public class Runner {
                     executeReport(validPath, "3");
                     break;
                 default:
-                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
+                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
                     break;
             }
         }
