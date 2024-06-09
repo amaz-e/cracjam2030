@@ -9,13 +9,13 @@ import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.demo.charts.ExampleChart;
 import org.knowm.xchart.style.Styler.LegendPosition;
 
-public class Chart implements ExampleChart<CategoryChart> {
+public class Chart1 implements ExampleChart<CategoryChart> {
 
     private List<String> keys;
     private List<Double> values;
 
 
-    public Chart(List<String>  keys, List<Double> values) {
+    public Chart1(List<String>  keys, List<Double> values) {
         this.keys = keys;
         this.values = values;
     }
@@ -23,14 +23,15 @@ public class Chart implements ExampleChart<CategoryChart> {
 
 
     public static void generateChart(MessageLogger logger) {
-
         List<String> keys = new ArrayList<String>(logger.getRaport1Data().keySet());;
         List<Double> values = new ArrayList<Double>(logger.getRaport1Data().values());
 
-        ExampleChart<CategoryChart> exampleChart = new Chart(keys, values);
+        ExampleChart<CategoryChart> exampleChart = new Chart1(keys, values);
         CategoryChart chart = exampleChart.getChart();
         new SwingWrapper<>(chart).displayChart();
     }
+
+
 
 
     @Override
@@ -52,6 +53,7 @@ public class Chart implements ExampleChart<CategoryChart> {
 
         // Series
         chart.addSeries("Dane", keys, values);
+
 
         return chart;
     }
