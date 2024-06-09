@@ -1,11 +1,16 @@
 package cracjam2030;
 import org.apache.commons.cli.*;
+
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Runner {
-    public static void main(String[] args) {
+
+    public static void executeProgram(String[] args) throws IOException {
         Options options = new Options();
 
         Option report = Option.builder("r")
@@ -64,7 +69,6 @@ public class Runner {
             System.exit(1);
         }
 
-
         String reportValue = cmdLine.getOptionValue("r");
         int reportNumber;
 
@@ -82,10 +86,12 @@ public class Runner {
 
         //Sprawdza poprawność ścieżki za pomocą funkcji isAbsoluteDirectoryPath
         boolean validPathProvided = false;
+        String validPath = "";
         for (String pathString : cmdLine.getArgs()) {
             if (isAbsoluteDirectoryPath(pathString)) {
                 System.out.println("Ścieżka jest absolutną ścieżką do katalogu. Przeszukuje katalog: " + pathString);
                 validPathProvided = true;
+                validPath = pathString;
                 break;
             }
         }
@@ -96,21 +102,28 @@ public class Runner {
         }
 
 
-        if ((cmdLine.hasOption("r"))&&(cmdLine.getOptionValue("r"))=="1") {
+        if (cmdLine.hasOption("r")){
 
-
-
-
+            switch (cmdLine.getOptionValue("r")) {
+                case "1":
+                    executeReport( validPath, 1);
+                    break;
+                case "2":
+                    executeReport( validPath, 2);
+                    break;
+                case "3":
+                    executeReport( validPath, 3);
+                    break;
+                default:
+                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
+                    break;
+            }
 
         }
 
-
-
-
         //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
         if (cmdLine.hasOption("d")) {
-            System.out.println("Rysujmey diagram");
-
+            System.out.println("Rysujemy diagram");
         }
 
         //Sprawdza czy ścieżka zawiera argument zapisu do pliku i wywołuje funkcję do zapisania raportu do pliku
@@ -122,17 +135,49 @@ public class Runner {
                 System.out.println("zapisujemy plik");}
 
             else System.out.println("Niepoprawna ścieżka zapisu");
-
-
-
         }
-
-
     }
 
     public static boolean isAbsoluteDirectoryPath(String pathString) {
         Path path = Paths.get(pathString);
         return path.isAbsolute() && Files.exists(path) && Files.isDirectory(path);
+    }
+
+    public static void executeReport(String path, int reportType) throws IOException {
+        XLSLoader loader = new XLSLoader();
+        ExcelFileFinder fileFinder = new ExcelFileFinder();
+        List<String> spreadsheetpathList = fileFinder.findExcelFiles(path);
+
+        List<TaskRecord> recordData = new ArrayList<>();
+        for (String s: spreadsheetpathList) {
+            loader.loadXLS(s);
+            recordData.addAll(loader.getRecords());
+        }
+
+//        System.out.println(recordData.size());
+//        for (TaskRecord t: recordData) {
+//            //wyświetlanie wszystkich rekordów
+//            System.out.println(t);
+//        }
+
+        switch (reportType) {
+            case 1:
+                Main.logger.addLine("\nRaport 1:");
+                Report1.createReport(recordData);
+                ReportPrinter.printReport(Main.logger);
+                break;
+            case 2:
+                Main.logger.addLine("\nRaport 2:");
+                Report2.createReport(recordData);
+                ReportPrinter.printReport(Main.logger);
+                break;
+            case 3:
+                Main.logger.addLine("\nRaport 3:");
+                Report3.createReport(recordData);
+                ReportPrinter.printReport(Main.logger);
+                break;
+
+        }
     }
 }
 
