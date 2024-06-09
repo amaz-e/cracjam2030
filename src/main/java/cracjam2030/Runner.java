@@ -6,7 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,10 +48,27 @@ public class Runner {
                 .desc("Wyświetla pomoc")
                 .build();
 
+        Option from = Option.builder("f")
+                .required(false)
+                .hasArg(true)
+                .longOpt("from")
+                .desc("Data początkowa przeszukiwania")
+                .build();
+
+        Option to = Option.builder("t")
+                .required(false)
+                .hasArg(true)
+                .longOpt("to")
+                .desc("Data końcowa przeszukiwania")
+                .build();
+
         options.addOption(report);
         options.addOption(diagram);
         options.addOption(save);
         options.addOption(help);
+        options.addOption(from);
+        options.addOption(to);
+
 
         CommandLineParser cliParser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -58,7 +80,7 @@ public class Runner {
         try {
             CommandLine prelimCmd = cliParser.parse(options, args, true);
             if (prelimCmd.hasOption("h")) {
-                formatter.printHelp("pomoc:", options);
+                formatter.printHelp(" ", options);
                 System.exit(0);
             }
         } catch (ParseException e) {
@@ -70,7 +92,7 @@ public class Runner {
 
         } catch (ParseException e) {
             Main.logger.addError("Błąd: " + e.getMessage());
-            formatter.printHelp("pomoc:", options);
+            formatter.printHelp(" ", options);
             System.exit(1);
         }
 
@@ -84,7 +106,8 @@ public class Runner {
             }
         } catch (IllegalArgumentException e) {
             Main.logger.addError("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
-            formatter.printHelp("pomoc:", options);
+            System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie działa bez podania tego argumentu.");
+            formatter.printHelp(" ", options);
             System.exit(1);
             return;
         }
@@ -103,8 +126,30 @@ public class Runner {
 
         if (!validPathProvided) {
             Main.logger.addError("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
+            System.out.println("Nie podano jako argumentu poprawnej ścieżki do katalogu źródłowego.");
             System.exit(1);
         }
+
+        try {
+            if (cmdLine.hasOption("f")) {
+            String strDate = cmdLine.getOptionValue("f");
+            LocalDate localDate = LocalDate.parse(strDate);
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Main.logger.setDateFromFilter(date);
+        }}catch (Exception e) {
+            Main.logger.addError("Błąd daty");
+        }
+
+
+        try {
+            if (cmdLine.hasOption("t")) {
+                String strDate = cmdLine.getOptionValue("t");
+                LocalDate localDate = LocalDate.parse(strDate);//"2018-05-05"
+                Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Main.logger.setDateToFilter(date);
+            }}catch (Exception e) {Main.logger.addError("Błąd daty");}
+
+
 
 
         if (cmdLine.hasOption("r")){
@@ -120,7 +165,7 @@ public class Runner {
                     executeReport(validPath, "3");
                     break;
                 default:
-                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
+                    System.out.println("Argument raport (-r) może przybierać wartości od 1 do 3. Program wymaga podania parametru r z wartością od 1 do 3 np. r=1. Program nie obsługuje raportu: " + cmdLine.getOptionValue("r"));
                     break;
             }
         }
