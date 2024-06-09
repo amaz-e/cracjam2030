@@ -41,16 +41,18 @@ public class XLSLoader {
                 }
 
 
-                if((row.getCell(1) == null) || (row.getCell(1).getCellType() == CellType.BLANK)) {
-                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                if((row.getCell(0) == null || (row.getCell(0).getCellType() == CellType.BLANK)) && (row.getCell(1) == null || (row.getCell(1).getCellType() == CellType.BLANK)) && (row.getCell(2) == null || (row.getCell(2).getCellType() == CellType.BLANK))) {
+                    continue;
+                } else if((row.getCell(1) == null) || (row.getCell(1).getCellType() == CellType.BLANK) || (row.getCell(1).getCellType() != CellType.STRING)) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Arkusz: " + sheet.getSheetName() + " Plik: " + path + "CASE1";
                     Main.logger.addError(message);
                      continue;
-                } else if((row.getCell(0) == null) || (row.getCell(0).getCellType() == CellType.BLANK)) {
-                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                } else if((row.getCell(0) == null) || (row.getCell(0).getCellType() == CellType.BLANK) || (row.getCell(0).getCellType() != CellType.NUMERIC) || !DateUtil.isCellDateFormatted(row.getCell(0))) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path + "CASE2";
                     Main.logger.addError(message);
                     continue;
-                } else if ((row.getCell(2) == null) || (row.getCell(2).getCellType() == CellType.BLANK)) {
-                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path;
+                } else if ((row.getCell(2) == null) || (row.getCell(2).getCellType() == CellType.BLANK) || (row.getCell(2).getCellType() != CellType.NUMERIC)) {
+                    String message = "Wystąpił błąd podczas dodania recordu. Rząd: " + (row.getRowNum()+1) + " Komórka: " + " Arkusz: " + sheet.getSheetName() + " Plik: " + path + "CASE3";
                     Main.logger.addError(message);
                     continue;
                 }
