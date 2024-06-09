@@ -176,7 +176,7 @@ public class Runner {
             Path path = Paths.get(savePath);
             Path catalogPaths = path.getParent();
             if (isAbsoluteDirectoryPath(String.valueOf(catalogPaths))) {
-                System.out.println("zapisujemy plik");
+                System.out.println("Plik zapisano w:"+ savePath);
                 XLSImporter.importToXLS(cmdLine.getOptionValue("r"));
             }
 
@@ -185,7 +185,6 @@ public class Runner {
 
         //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
         if (cmdLine.hasOption("d")) {
-            System.out.println("Rysujemy diagram");
             Chart.generateChart(cmdLine.getOptionValue("r"));
         }
 
