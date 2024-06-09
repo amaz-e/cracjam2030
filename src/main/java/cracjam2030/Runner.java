@@ -125,12 +125,6 @@ public class Runner {
 
 
 
-        //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
-        if (cmdLine.hasOption("d")) {
-            System.out.println("Rysujemy diagram");
-            Chart.generateChart(cmdLine.getOptionValue("r"));
-        }
-
         //Sprawdza czy ścieżka zawiera argument zapisu do pliku i wywołuje funkcję do zapisania raportu do pliku
         if (cmdLine.hasOption("s")) {
             String savePath = cmdLine.getOptionValue(save);
@@ -143,6 +137,14 @@ public class Runner {
 
             else System.out.println("Niepoprawna ścieżka zapisu");
         }
+
+        //Sprawdza czy ścieżka zawiera argument diagramu i wywołuje funkcję do wykonania diagramu
+        if (cmdLine.hasOption("d")) {
+            System.out.println("Rysujemy diagram");
+            Chart.generateChart(cmdLine.getOptionValue("r"));
+        }
+
+
     }
 
 
